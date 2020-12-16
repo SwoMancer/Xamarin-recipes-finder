@@ -1,0 +1,1 @@
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe.UWP\Xamarin app recipe.UWP.csproj;x86

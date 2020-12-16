@@ -1,0 +1,14 @@
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\bin\Debug\netstandard2.0\Xamarin app recipe.deps.json
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\bin\Debug\netstandard2.0\Xamarin app recipe.dll
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\bin\Debug\netstandard2.0\ref\Xamarin app recipe.dll
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\bin\Debug\netstandard2.0\Xamarin app recipe.pdb
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\Xamarin app recipe.csprojAssemblyReference.cache
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\App.xaml.g.cs
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\Xamarin app recipe.AssemblyInfoInputs.cache
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\Xamarin app recipe.AssemblyInfo.cs
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\Xamarin app recipe.csproj.CoreCompileInputs.cache
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\XamlC.stamp
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\Xamarin app recipe.dll
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\ref\Xamarin app recipe.dll
+G:\Github\Xamarin-App\Xamarin app recipe\Xamarin app recipe\obj\Debug\netstandard2.0\Xamarin app recipe.pdb
