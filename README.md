@@ -1,2 +1,2 @@
 # Xamarin-App
-Xamarin App i kursen SUM200
+Xamarin App för kursen SUM200
