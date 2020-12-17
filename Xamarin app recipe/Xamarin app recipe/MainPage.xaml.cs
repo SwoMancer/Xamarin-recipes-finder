@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_app_recipe.Model;
 using Xamarin.Essentials;
+using Xamarin_app_recipe.ViewModel;
 
 namespace Xamarin_app_recipe
 {
     public partial class MainPage : ContentPage
     {
         #region items
-        List<Ingredient> ingredients = new List<Ingredient>();
-        List<Recipe> recipes = new List<Recipe>();
+        public static RecipeViewModel recipeModel { get; set; } = new RecipeViewModel();
+        public static IngredientViewModel ingredientModel { get; set; } = new IngredientViewModel();
+
+
         private readonly Random random = new Random();
         #endregion
 
@@ -26,107 +29,25 @@ namespace Xamarin_app_recipe
 
         private void LoadRandomItems()
         {
-            ingredients = API.DummyRecipepuppy.RandomIngredients(3);
-            recipes = API.DummyRecipepuppy.RandomRecipes(2);
+            ingredientModel.ReplaceDataRang(API.DummyRecipepuppy.RandomIngredients(7));
+            recipeModel.ReplaceDataRang(API.DummyRecipepuppy.RandomRecipes(3));
 
-            ingredients = ingredients.OrderBy(n => n.Name).ThenBy(p => p.IsADemandItem).ToList();
-            UpdateIntegrityIngredientsList();
+            ingredientModel.SortMe();
+            ingredientModel.UpdateIntegrity();
 
-            listOfIngredients.ItemsSource = ingredients;
-            listOfRecipes.ItemsSource = recipes;
+            //BindingContext = ingredientModel;
+            //BindingContext = recipeModel;
+            listOfIngredients.ItemsSource = ingredientModel.Ingredients;
+            listOfRecipes.ItemsSource = recipeModel.Recipes;
         }
-        private void UpdateIntegrityIngredientsList()
-        {
-            if (ingredients.Count <= 1)
-                return;
-
-            List<Ingredient> deletesIngredients = new List<Ingredient>();
-
-            foreach (Ingredient ingredient in ingredients)
-            {
-                //Hitta om det finns flera med samma namn.
-                List<Ingredient> tempIngredients = ingredients.Where(n => n.Name == ingredient.Name).ToList();
-
-                if (tempIngredients is null)
-                    return;
-
-                if (tempIngredients.Count() == 2)
-                {
-                    if (tempIngredients[0].Prefix == tempIngredients[1].Prefix)
-                    {
-                        deletesIngredients.Add(tempIngredients[1]);
-                    }
-                    else
-                    {
-                        deletesIngredients.Add(tempIngredients[0]);
-                        deletesIngredients.Add(tempIngredients[1]);
-                    }
-                }
-                else if (tempIngredients.Count() >= 3)
-                {
-                    int plus, minus;
-
-                    plus = tempIngredients.Where(p => p.IsADemandItem).Count();
-                    minus = tempIngredients.Where(p => !p.IsADemandItem).Count();
-
-                    if (plus == minus)
-                    {
-                        deletesIngredients.AddRange(tempIngredients);
-                    }
-                    else if (plus > minus)
-                    {
-                        tempIngredients.Remove(tempIngredients.Where(p => p.IsADemandItem).FirstOrDefault());
-                        deletesIngredients.AddRange(tempIngredients);
-                    }
-                    else if (plus < minus)
-                    {
-                        tempIngredients.Remove(tempIngredients.Where(p => !p.IsADemandItem).FirstOrDefault());
-                        deletesIngredients.AddRange(tempIngredients);
-                    }
-                }
-            }
-
-            if (deletesIngredients is null || deletesIngredients.Count == 0)
-                return;
-
-            deletesIngredients = deletesIngredients.Distinct().ToList();
-
-            foreach (Ingredient beDelete in deletesIngredients)
-                ingredients.Remove(beDelete);
-
-        }
+        /*
         private void UpdateIngredientsView()
         {
             listOfIngredients.ItemsSource = null;
             listOfIngredients.ItemsSource = ingredients;
         }
-        private void UpdateRecipesView()
-        {
-            if (recipes.Count <= 0)
-                return;
-
-            listOfRecipes.ItemsSource = null;
-            listOfRecipes.ItemsSource = recipes;
-        }
-        private void CreateIngredient(bool isADemandItem)
-        {
-            Ingredient ingredient = new Ingredient();
-            string input = entryInput.Text;
-
-            if (string.IsNullOrEmpty(input) || string.IsNullOrWhiteSpace(input))
-                return;
-
-            input = input.Trim(new char[] { ' ', ',', '+', '-' }).ToLower();
-            //Spelar inte så stor roll med id men...
-            ingredient.Id = random.Next(0, 1000000);
-            ingredient.Name = input;
-            ingredient.IsADemandItem = isADemandItem;
-
-            entryInput.Text = string.Empty;
-            entryInput.Placeholder = input;
-
-            ingredients.Add(ingredient);
-        }
+        */
+        
         private async System.Threading.Tasks.Task OpenLink(string link)
         {
             try
@@ -147,8 +68,8 @@ namespace Xamarin_app_recipe
             Ingredient selectedIngredient = (Ingredient)e.SelectedItem;
 
             //ingredients.Remove(ingredients.Where(n => n.Name == selectedIngredient.Name && n.Id == selectedIngredient.Id).FirstOrDefault());
-            ingredients.Remove(selectedIngredient);
-            UpdateIngredientsView();
+            ingredientModel.RemoveDataItem(selectedIngredient);
+            //UpdateIngredientsView();
         }
         private async void listOfRecipes_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -161,15 +82,11 @@ namespace Xamarin_app_recipe
         }
         private void btnAdd_Clicked(object sender, EventArgs e)
         {
-            CreateIngredient(true);
-            UpdateIntegrityIngredientsList();
-            UpdateIngredientsView();
+            ingredientModel.Create(entryInput, true);
         }
         private void btnBan_Clicked(object sender, EventArgs e)
         {
-            CreateIngredient(false);
-            UpdateIntegrityIngredientsList();
-            UpdateIngredientsView();
+            ingredientModel.Create(entryInput, false);
         }
         private void btnFindRecipes_Clicked(object sender, EventArgs e)
         {

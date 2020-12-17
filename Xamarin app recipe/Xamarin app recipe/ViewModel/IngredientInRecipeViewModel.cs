@@ -20,6 +20,13 @@ namespace Xamarin_app_recipe.ViewModel
                 return this.ingredientInRecipes;
             }
         }
+        public List<IngredientInRecipe> IngredientListInRecipes
+        {
+            get
+            {
+                return ingredientInRecipes.ToList();
+            }
+        }
         public string Title
         {
             get
@@ -27,26 +34,31 @@ namespace Xamarin_app_recipe.ViewModel
                 return "Ingredients:";
             }
         }
+        
         #region CURD
         #region Create
-        public void LoadDataRang(ObservableCollection<IngredientInRecipe> ingredients)
+        public void ReplaceDataRang(ObservableCollection<IngredientInRecipe> ingredients)
         {
             ingredientInRecipes = ingredients;
         }
-        public void LoadDataRang(List<IngredientInRecipe> ingredients)
+        public void ReplaceDataRang(List<IngredientInRecipe> ingredients)
         {
             ingredientInRecipes.Clear();
-            LoadAddDataRang(ingredients);
+            AddDataRang(ingredients);
         }
-        public void LoadAddDataRang(List<IngredientInRecipe> ingredients)
+        public void AddData(IngredientInRecipe ingredient)
+        {
+            ingredientInRecipes.Add(ingredient);
+        }
+        public void AddDataRang(List<IngredientInRecipe> ingredients)
         {
             foreach (IngredientInRecipe ingredientInRecipe in ingredients)
-                ingredientInRecipes.Add(ingredientInRecipe);
+                AddData(ingredientInRecipe);
         }
-        public void LoadAddDataRang(ObservableCollection<IngredientInRecipe> ingredients)
+        public void AddDataRang(ObservableCollection<IngredientInRecipe> ingredients)
         {
             foreach (IngredientInRecipe ingredient in ingredients)
-                ingredientInRecipes.Add(ingredient);
+                AddData(ingredient);
         }
         #endregion
         #region Read

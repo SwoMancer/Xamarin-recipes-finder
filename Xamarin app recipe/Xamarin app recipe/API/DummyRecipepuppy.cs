@@ -45,7 +45,7 @@ namespace Xamarin_app_recipe.API
             recipe.HrefToSide = "https://155.4.70.67/API/Logging";
             recipe.Name = RandomName();
             for (int j = 0; j < random.Next(5, 34); j++)
-                recipe.ChildIngredients.Add(new IngredientInRecipe(RandomIngredient(j)));
+                recipe.IngredientInRecipeModel.AddData(new IngredientInRecipe(RandomIngredient(j)));
             
             return recipe;
         }

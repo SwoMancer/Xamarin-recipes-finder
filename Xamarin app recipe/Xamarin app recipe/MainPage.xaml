@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Xamarin_app_recipe"
              x:Class="Xamarin_app_recipe.MainPage">
 
     <Grid>
@@ -87,12 +88,11 @@
             </Grid>
         </StackLayout>
         <!--#endregion-->
-        <!--#region Body-->
-        <ListView Grid.Row="1" x:Name="listOfRecipes" Margin="40, 0" ItemSelected="listOfRecipes_ItemSelected">
+        <ListView Grid.Row="1" x:Name="listOfRecipes" Margin="40, 0" ItemSelected="listOfRecipes_ItemSelected" RowHeight="100" Grid.RowSpan="1" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
+                        <StackLayout HeightRequest="100">
                             <Grid>
                                 <!--#region Grid Definitions-->
                                 <Grid.RowDefinitions>
@@ -127,16 +127,21 @@
                                             <Label FontSize="Medium" 
                                                 Text="{Binding Name}"/>
                                         </StackLayout>
-
-                                        <StackLayout Grid.Row="1" BackgroundColor="Violet" Padding="0" Margin="0">
-                                            <CollectionView 
-                                                ItemsSource="{Binding ChildIngredients}"
-                                                >
+                                        
+                                        <!--ItemsSource="{Binding IngredientInRecipeModel}"-->
+                                        
+                                        <StackLayout Grid.Row="1" BackgroundColor="Violet">
+                                            <CollectionView ItemsSource="{Binding JumpIngredientInRecipes}" ItemsLayout="HorizontalList" x:Name="UnDefindIngredientsCollection">
                                                 <CollectionView.ItemTemplate>
                                                     <DataTemplate>
-                                                        <StackLayout>
-                                                            <Label Text="{Binding Name}"/>
-                                                        </StackLayout>
+
+                                                        <Label 
+                                                                Text="{Binding Name}" 
+                                                                VerticalOptions="CenterAndExpand"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                VerticalTextAlignment="Center" 
+                                                                HorizontalTextAlignment="Center" />
+
                                                     </DataTemplate>
                                                 </CollectionView.ItemTemplate>
                                             </CollectionView>
@@ -153,3 +158,21 @@
     </Grid>
 
 </ContentPage>
+<!--
+
+    <StackLayout HorizontalOptions="Start" Orientation="Horizontal" VerticalOptions="Start" WidthRequest="50" MinimumHeightRequest="50" BackgroundColor="#FFF000">
+        <Label Text="{Binding Name}" LineBreakMode="NoWrap" HorizontalTextAlignment="Center" />
+    </StackLayout>
+
+    <StackLayout Grid.Row="1" BackgroundColor="Violet">
+                                            <CollectionView 
+                                                ItemsSource="{Binding JumpIngredientInRecipes}" ItemSizingStrategy="MeasureFirstItem" VerticalOptions="Start" VerticalScrollBarVisibility="Default" HorizontalOptions="Start"
+                                                >
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </StackLayout>
+-->
