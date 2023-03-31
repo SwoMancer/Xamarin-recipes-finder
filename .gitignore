@@ -1,0 +1,14 @@
+Xamarin app recipe/bin/*
+Xamarin app recipe/obj/*
+
+Xamarin app recipe.Android/bin/*
+Xamarin app recipe.Android/obj/*
+
+Xamarin app recipe.iOS/bin/*
+Xamarin app recipe.iOS/obj/*
+
+Xamarin app recipe.UWP/bin/*
+Xamarin app recipe.UWP/obj/*
+
+# macOS
+.DS_Store
